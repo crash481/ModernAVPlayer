@@ -26,59 +26,59 @@
 
 // Compilation failed from SPM without this import
 import ModernAVPlayer
-import RxCocoa
-import RxSwift
+import Combine
+import CombineCocoa
 
 extension ModernAVPlayer: HasDelegate {
     public typealias Delegate = ModernAVPlayerDelegate
 }
 
-public class RxPlayerContextDelegateProxy: DelegateProxy<ModernAVPlayer, ModernAVPlayerDelegate>,
+public class CombinePlayerContextDelegateProxy: DelegateProxy<ModernAVPlayer, ModernAVPlayerDelegate>,
     DelegateProxyType,
 ModernAVPlayerDelegate {
     
     // MARK: - Initialization
     
     public init(playerContext: ModernAVPlayer) {
-        super.init(parentObject: playerContext, delegateProxy: RxPlayerContextDelegateProxy.self)
+        super.init(parentObject: playerContext, delegateProxy: CombinePlayerContextDelegateProxy.self)
     }
     
     public static func registerKnownImplementations() {
-        register { RxPlayerContextDelegateProxy(playerContext: $0) }
+        register { CombinePlayerContextDelegateProxy(playerContext: $0) }
     }
     
     // MARK: - Proxy Subjects
     
-    lazy var stateSubject = PublishSubject<ModernAVPlayer.State>()
-    lazy var currentMediaSubject = PublishSubject<PlayerMedia?>()
-    lazy var currentTimeSubject = PublishSubject<Double>()
-    lazy var itemDurationSubject = PublishSubject<Double?>()
-    lazy var unavailableActionSubject = PublishSubject<PlayerUnavailableActionReason>()
-    lazy var itemPlayToEndTimeSubject = PublishSubject<Double>()
+    lazy var stateSubject = PassthroughSubject<ModernAVPlayer.State, Never>()
+    lazy var currentMediaSubject = PassthroughSubject<PlayerMedia?, Never>()
+    lazy var currentTimeSubject = PassthroughSubject<Double, Never>()
+    lazy var itemDurationSubject = PassthroughSubject<Double?, Never>()
+    lazy var unavailableActionSubject = PassthroughSubject<PlayerUnavailableActionReason, Never>()
+    lazy var itemPlayToEndTimeSubject = PassthroughSubject<Double, Never>()
     
     // MARK: - ModernAVPlayerDelegate
     
     public func modernAVPlayer(_ player: ModernAVPlayer, didStateChange state: ModernAVPlayer.State) {
-        stateSubject.onNext(state)
+        stateSubject.send(state)
     }
     
     public func modernAVPlayer(_ player: ModernAVPlayer, didCurrentMediaChange media: PlayerMedia?) {
-        currentMediaSubject.onNext(media)
+        currentMediaSubject.send(media)
     }
     
     public func modernAVPlayer(_ player: ModernAVPlayer, didCurrentTimeChange currentTime: Double) {
-        currentTimeSubject.onNext(currentTime)
+        currentTimeSubject.send(currentTime)
     }
     
     public func modernAVPlayer(_ player: ModernAVPlayer, didItemDurationChange itemDuration: Double?) {
-        itemDurationSubject.onNext(itemDuration)
+        itemDurationSubject.send(itemDuration)
     }
     
     public func modernAVPlayer(_ player: ModernAVPlayer, unavailableActionReason: PlayerUnavailableActionReason) {
-        unavailableActionSubject.onNext(unavailableActionReason)
+        unavailableActionSubject.send(unavailableActionReason)
     }
     
     public func modernAVPlayer(_ player: ModernAVPlayer, didItemPlayToEndTime endTime: Double) {
-        itemPlayToEndTimeSubject.onNext(endTime)
+        itemPlayToEndTimeSubject.send(endTime)
     }
 }

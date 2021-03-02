@@ -18,5 +18,5 @@ end
 
 target 'ModernAVPlayer_Example_tvOS' do
   platform :tvos, '10.0'
-  pod 'ModernAVPlayer/RxSwift', :path => '.'
+  pod 'ModernAVPlayer/Combine', :path => '.'
 end

@@ -2,12 +2,21 @@
   "object": {
     "pins": [
       {
-        "package": "RxSwift",
-        "repositoryURL": "https://github.com/ReactiveX/RxSwift.git",
+        "package": "CombineOperators",
+        "repositoryURL": "https://github.com/dankinsoid/CombineOperators.git",
         "state": {
           "branch": null,
-          "revision": "002d325b0bdee94e7882e1114af5ff4fe1e96afa",
-          "version": "5.1.1"
+          "revision": "4d009efac7a251e26f03a41ec448c5c8e7ae79b4",
+          "version": "1.38.0"
+        }
+      },
+      {
+        "package": "VDKit",
+        "repositoryURL": "https://github.com/dankinsoid/VDKit.git",
+        "state": {
+          "branch": null,
+          "revision": "2a11f2ea1812045fc07bc4bb9e1b2dbd093adb7c",
+          "version": "1.13.0"
         }
       }
     ]

@@ -26,36 +26,36 @@
 
 // Compilation failed from SPM without this import
 import ModernAVPlayer
-import RxCocoa
-import RxSwift
+import CombineCocoa
+import Combine
 
 public extension Reactive where Base: ModernAVPlayer {
     
     var delegate: DelegateProxy<ModernAVPlayer, ModernAVPlayerDelegate> {
-        return RxPlayerContextDelegateProxy.proxy(for: base)
+        return CombinePlayerContextDelegateProxy.proxy(for: base)
     }
     
-    var state: Observable<ModernAVPlayer.State> {
-        return RxPlayerContextDelegateProxy.proxy(for: base).stateSubject.asObservable()
+    var state: AnyPublisher<ModernAVPlayer.State, Never> {
+        return CombinePlayerContextDelegateProxy.proxy(for: base).stateSubject.any()
     }
     
-    var currentMedia: Observable<PlayerMedia?> {
-        return RxPlayerContextDelegateProxy.proxy(for: base).currentMediaSubject.asObservable()
+    var currentMedia: AnyPublisher<PlayerMedia?, Never> {
+        return CombinePlayerContextDelegateProxy.proxy(for: base).currentMediaSubject.any()
     }
     
-    var currentTime: Observable<Double> {
-        return RxPlayerContextDelegateProxy.proxy(for: base).currentTimeSubject.asObservable()
+    var currentTime: AnyPublisher<Double, Never> {
+        return CombinePlayerContextDelegateProxy.proxy(for: base).currentTimeSubject.any()
     }
     
-    var itemDuration: Observable<Double?> {
-        return RxPlayerContextDelegateProxy.proxy(for: base).itemDurationSubject.asObservable()
+    var itemDuration: AnyPublisher<Double?, Never> {
+        return CombinePlayerContextDelegateProxy.proxy(for: base).itemDurationSubject.any()
     }
     
-    var unavailableActionReason: Observable<PlayerUnavailableActionReason> {
-        return RxPlayerContextDelegateProxy.proxy(for: base).unavailableActionSubject.asObservable()
+    var unavailableActionReason: AnyPublisher<PlayerUnavailableActionReason, Never> {
+        return CombinePlayerContextDelegateProxy.proxy(for: base).unavailableActionSubject.any()
     }
     
-    var itemPlayToEndTime: Observable<Double> {
-        return RxPlayerContextDelegateProxy.proxy(for: base).itemPlayToEndTimeSubject.asObservable()
+    var itemPlayToEndTime: AnyPublisher<Double, Never> {
+        return CombinePlayerContextDelegateProxy.proxy(for: base).itemPlayToEndTimeSubject.any()
     }
 }

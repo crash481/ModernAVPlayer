@@ -3,13 +3,13 @@ import PackageDescription
 
 let package = Package(
     name: "ModernAVPlayer",
-    platforms: [.iOS(.v10), .tvOS(.v10)],
+    platforms: [.iOS(.v13), .tvOS(.v13)],
     products: [
         .library(name: "ModernAVPlayer", targets: ["ModernAVPlayer"]),
-        .library(name: "RxModernAVPlayer", targets: ["RxModernAVPlayer"])
+        .library(name: "CombineModernAVPlayer", targets: ["CombineModernAVPlayer"])
     ],
 	dependencies: [
-		.package(url: "https://github.com/ReactiveX/RxSwift.git", .upToNextMajor(from: "5.0.0"))
+		.package(url: "https://github.com/dankinsoid/CombineOperators.git", .upToNextMajor(from: "1.38.0"))
 	],
     targets: [
         .target(
@@ -17,14 +17,13 @@ let package = Package(
 			path: "Sources/Core"
 		),
         .target(
-			name: "RxModernAVPlayer",
+			name: "CombineModernAVPlayer",
 			dependencies: [
 				.target(name: "ModernAVPlayer"),
-				.product(name: "RxSwift", package: "RxSwift"),
-				.product(name: "RxCocoa", package: "RxSwift")
+				.product(name: "CombineOperators", package: "CombineOperators"),
+				.product(name: "CombineCocoa", package: "CombineOperators")
 			],
-			path: "Sources/RxModernAVPlayer"
+			path: "Sources/CombineModernAVPlayer"
 		)
     ]
 )
-
