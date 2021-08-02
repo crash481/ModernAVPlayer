@@ -6,12 +6,12 @@ PODS:
     - RxSwift (~> 5.0)
   - Nimble (8.0.4)
   - Quick (2.2.0)
-  - RxCocoa (5.0.1):
-    - RxRelay (~> 5)
-    - RxSwift (~> 5)
-  - RxRelay (5.0.1):
-    - RxSwift (~> 5)
-  - RxSwift (5.0.1)
+  - RxCocoa (6.1.0):
+    - RxRelay (~> 6.1.0)
+    - RxSwift (~> 6.1.0)
+  - RxRelay (6.1.0):
+    - RxSwift (~> 6.1.0)
+  - RxSwift (6.1.0)
   - Sourcery (0.17.0)
   - SwiftLint (0.38.2)
   - SwiftyMocky (3.5.0):
